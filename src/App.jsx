@@ -61,9 +61,33 @@ function openLink(url) {
 }
 
 function downloadFile(dataUrl, filename) {
+  filename = filename || "archivo";
+  // For PDFs and files on mobile, open in new tab
+  if (dataUrl.indexOf("data:application/pdf") === 0 || 
+      (filename && filename.toLowerCase().endsWith(".pdf"))) {
+    // Convert base64 to blob and open
+    try {
+      var byteString = atob(dataUrl.split(",")[1]);
+      var mimeString = dataUrl.split(",")[0].split(":")[1].split(";")[0];
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      var blob = new Blob([ab], { type: mimeString });
+      var url = URL.createObjectURL(blob);
+      window.open(url, "_blank", "noopener,noreferrer");
+      setTimeout(function() { URL.revokeObjectURL(url); }, 10000);
+    } catch(e) {
+      // fallback
+      window.open(dataUrl, "_blank", "noopener,noreferrer");
+    }
+    return;
+  }
+  // For images and other files
   var a = document.createElement("a");
   a.href = dataUrl;
-  a.download = filename || "archivo";
+  a.download = filename;
   a.target = "_blank";
   document.body.appendChild(a);
   a.click();
