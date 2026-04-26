@@ -1199,25 +1199,23 @@ function ConversorView({ currency }) {
       
       // DE
       React.createElement("p", { style:{ color:"#64748b", fontSize:10, textTransform:"uppercase", letterSpacing:1.5, margin:"0 0 8px" } }, "De"),
-      React.createElement("div", { style:{ display:"flex", gap:10, alignItems:"center", marginBottom:4 } },
-        React.createElement("input", {
-          type:"number", placeholder:"0", value:mont,
-          onChange:function(e){ setMont(e.target.value); },
-          style:{ flex:1, background:"rgba(255,255,255,0.08)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:14, padding:"14px 16px", color:"#f8fafc", fontSize:24, fontWeight:800, outline:"none", fontFamily:"'Outfit',sans-serif" }
-        }),
-        React.createElement("div", { style:{ display:"flex", flexDirection:"column", alignItems:"center" } },
-          React.createElement("span", { style:{ fontSize:22 } }, desdeM.flag),
-          React.createElement("select", {
-            value:desde,
-            onChange:function(e){ setDesde(e.target.value); },
-            style:selStyle
-          },
-            monedas.map(function(m){
-              return React.createElement("option", { key:m.code, value:m.code, style:{ background:"#0d1829" } },
-                m.flag + " " + m.code + " - " + m.name
-              );
-            })
-          )
+      React.createElement("input", {
+        type:"number", placeholder:"0", value:mont,
+        onChange:function(e){ setMont(e.target.value); },
+        style:{ display:"block", width:"100%", background:"rgba(255,255,255,0.08)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:14, padding:"14px 16px", color:"#f8fafc", fontSize:24, fontWeight:800, outline:"none", fontFamily:"'Outfit',sans-serif", boxSizing:"border-box", marginBottom:8 }
+      }),
+      React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:10, marginBottom:4 } },
+        React.createElement("span", { style:{ fontSize:22 } }, desdeM.flag),
+        React.createElement("select", {
+          value:desde,
+          onChange:function(e){ setDesde(e.target.value); },
+          style:Object.assign({},selStyle,{flex:1})
+        },
+          monedas.map(function(m){
+            return React.createElement("option", { key:m.code, value:m.code, style:{ background:"#0d1829" } },
+              m.flag + " " + m.code + " - " + m.name
+            );
+          })
         )
       ),
 
@@ -1231,23 +1229,21 @@ function ConversorView({ currency }) {
 
       // A
       React.createElement("p", { style:{ color:"#64748b", fontSize:10, textTransform:"uppercase", letterSpacing:1.5, margin:"0 0 8px" } }, "A"),
-      React.createElement("div", { style:{ display:"flex", gap:10, alignItems:"center" } },
-        React.createElement("div", { style:{ flex:1, background:"rgba(52,211,153,0.08)", border:"1px solid rgba(52,211,153,0.25)", borderRadius:14, padding:"14px 16px", minHeight:56, display:"flex", alignItems:"center" } },
-          React.createElement("p", { style:{ color:"#34d399", fontSize:24, fontWeight:800, margin:0 } }, resultado || "0.00")
-        ),
-        React.createElement("div", { style:{ display:"flex", flexDirection:"column", alignItems:"center" } },
-          React.createElement("span", { style:{ fontSize:22 } }, hastaM.flag),
-          React.createElement("select", {
-            value:hasta,
-            onChange:function(e){ setHasta(e.target.value); },
-            style:selStyle
-          },
-            monedas.map(function(m){
-              return React.createElement("option", { key:m.code, value:m.code, style:{ background:"#0d1829" } },
-                m.flag + " " + m.code + " - " + m.name
-              );
-            })
-          )
+      React.createElement("div", { style:{ background:"rgba(52,211,153,0.08)", border:"1px solid rgba(52,211,153,0.25)", borderRadius:14, padding:"14px 16px", marginBottom:8, display:"flex", alignItems:"center" } },
+        React.createElement("p", { style:{ color:"#34d399", fontSize:24, fontWeight:800, margin:0 } }, resultado || "0.00")
+      ),
+      React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:10 } },
+        React.createElement("span", { style:{ fontSize:22 } }, hastaM.flag),
+        React.createElement("select", {
+          value:hasta,
+          onChange:function(e){ setHasta(e.target.value); },
+          style:Object.assign({},selStyle,{flex:1})
+        },
+          monedas.map(function(m){
+            return React.createElement("option", { key:m.code, value:m.code, style:{ background:"#0d1829" } },
+              m.flag + " " + m.code + " - " + m.name
+            );
+          })
         )
       ),
 
